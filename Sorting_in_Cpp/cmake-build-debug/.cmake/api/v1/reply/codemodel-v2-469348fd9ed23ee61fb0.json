@@ -1,0 +1,60 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.24"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "Sorting_in_Cpp",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "Sorting_in_Cpp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Sorting_in_Cpp-Debug-2f60430efbf8a0ece8ae.json",
+					"name" : "Sorting_in_Cpp",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "D:/PremieraAlpha/College/2nd_Year-Second_Semester/CS244-Design_Analysis_of_Algorithms/Lesson_01-Sorting_Algorithms/Sorting_in_Cpp/cmake-build-debug",
+		"source" : "D:/PremieraAlpha/College/2nd_Year-Second_Semester/CS244-Design_Analysis_of_Algorithms/Lesson_01-Sorting_Algorithms/Sorting_in_Cpp"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 4
+	}
+}
