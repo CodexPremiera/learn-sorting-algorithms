@@ -2,7 +2,20 @@ import java.util.List;
 
 public class Sorter<T extends Comparable<T>> {
 
-    /* METHODS */
+    /* SORTING ALGORITHMS */
+
+    /**
+     * BUBBLE SORT
+     *
+     * <p> The bubble sort algorithm is infamous for being so slow.
+     * The algorithm iterates through the list. On each iteration,
+     * it iterates again to find the largest element of the list
+     * and 'bubble-it-up' to the end.
+     *
+     * <li> Worst-case Time Complexity: `O(n²)`
+     * <li> Average-case Time Complexity: `O(n²)`
+     * <li> Best-case Time Complexity: `O(n²)`
+     * */
     public void bubble(List<T> list) {
         int last = list.size() - 1;
 
@@ -10,6 +23,7 @@ public class Sorter<T extends Comparable<T>> {
             boolean didSwap = false;
             int startOfSorted = last - i;
 
+            // iterate only through the unsorted section
             for (int j = 0; j < startOfSorted; j++) {
                 // record values
                 T current = list.get(j);
@@ -29,5 +43,5 @@ public class Sorter<T extends Comparable<T>> {
             if (!didSwap)
                 break;
         }
-    }
+    } // END OF BUBBLE SORT
 }
