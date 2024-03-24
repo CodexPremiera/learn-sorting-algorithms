@@ -3,4 +3,4 @@ project(Sorting_in_Cpp)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(Sorting_in_Cpp main.cpp)
+add_executable(Sorting_in_Cpp main.cpp sorter.h)
