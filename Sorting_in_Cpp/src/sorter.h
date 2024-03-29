@@ -8,7 +8,6 @@
 
 using namespace std;
 
-template<typename T>
 class Sorter {
 public:
     /* SORTING ALGORITHMS */
@@ -25,7 +24,8 @@ public:
      * <li> Average-case Time Complexity: `O(n²)`
      * <li> Best-case Time Complexity: `O(n²)`
      * */
-    void bubble(vector<T>& list) {
+    template<typename T>
+    void static bubble(vector<T>& list) {
         int last = list.size() - 1;
 
         for (int i = 0; i < last; i++) {
@@ -39,10 +39,12 @@ public:
                 T next = list[j + 1];
 
                 // check if current > next
-                if (current > next) {
-                    swap(list[j], list[j + 1]);
-                    didSwap = true;
-                }
+                if (!(current > next))
+                    continue;
+
+                // swap current and next
+                std::swap(list[j], list[j + 1]);
+                didSwap = true;
             }
 
             if (!didSwap)

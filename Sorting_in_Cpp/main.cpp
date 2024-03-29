@@ -1,6 +1,9 @@
-#include <iostream>
+#include "test/sorter_test.h"
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
+    SorterTester* tester = new SorterTester();
+
+    tester->testBubbleSort();
+
     return 0;
 }
