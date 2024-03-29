@@ -7,19 +7,20 @@ import java.util.List;
 
 
 public class SorterTest {
+    private final int sampleSize = 8000;
 
     /* TEST BUBBLE SORT */
     @Test
     public void testBubbleSort() {
-        new Thread(() -> testBubbleSortByClass(Integer.class)).start();
-        new Thread(() -> testBubbleSortByClass(Double.class)).start();
-        new Thread(() -> testBubbleSortByClass(Character.class)).start();
-        new Thread(() -> testBubbleSortByClass(String.class)).start();
+        testBubbleSortByClass(Integer.class);
+        testBubbleSortByClass(Double.class);
+        testBubbleSortByClass(Character.class);
+        testBubbleSortByClass(String.class);
     }
 
     private <T extends Comparable<T>> void testBubbleSortByClass(Class<T> type) {
         // make lists of certain size
-        List<T> list = generateList(2000000, type);
+        List<T> list = generateList(sampleSize, type);
 
         List<T> sortedList = new ArrayList<>(list);
         Collections.sort(sortedList);
@@ -28,9 +29,9 @@ public class SorterTest {
         Collections.reverse(reverseList);
 
         // test lists
-        new Thread(() -> testBubbleSortAList(list, sortedList)).start();
-        new Thread(() -> testBubbleSortAList(sortedList, sortedList)).start();
-        new Thread(() -> testBubbleSortAList(reverseList, sortedList)).start();
+        testBubbleSortAList(list, sortedList);
+        testBubbleSortAList(sortedList, sortedList);
+        testBubbleSortAList(reverseList, sortedList);
     }
 
     <T extends Comparable<T>> void testBubbleSortAList(List<T> input, List<T> expected) {
@@ -39,18 +40,19 @@ public class SorterTest {
     } // END TEST BUBBLE SORT
 
 
+
     /* TEST SELECTION SORT */
     @Test
     public void testSelectionSort() {
-        new Thread(() -> testSelectionSortByClass(Integer.class)).start();
-        new Thread(() -> testSelectionSortByClass(Double.class)).start();
-        new Thread(() -> testSelectionSortByClass(Character.class)).start();
-        new Thread(() -> testSelectionSortByClass(String.class)).start();
+        testSelectionSortByClass(Integer.class);
+        testSelectionSortByClass(Double.class);
+        testSelectionSortByClass(Character.class);
+        testSelectionSortByClass(String.class);
     }
 
     private <T extends Comparable<T>> void testSelectionSortByClass(Class<T> type) {
         // make lists of certain size
-        List<T> list = generateList(2000000, type);
+        List<T> list = generateList(sampleSize, type);
 
         List<T> sortedList = new ArrayList<>(list);
         Collections.sort(sortedList);
@@ -59,15 +61,47 @@ public class SorterTest {
         Collections.reverse(reverseList);
 
         // test lists
-        new Thread(() -> testSelectionSortAList(list, sortedList)).start();
-        new Thread(() -> testSelectionSortAList(sortedList, sortedList)).start();
-        new Thread(() -> testSelectionSortAList(reverseList, sortedList)).start();
+        testSelectionSortAList(list, sortedList);
+        testSelectionSortAList(sortedList, sortedList);
+        testSelectionSortAList(reverseList, sortedList);
     }
 
     <T extends Comparable<T>> void testSelectionSortAList(List<T> input, List<T> expected) {
         Sorter.selection(input);
         Assertions.assertEquals(expected, input);
     } // END TEST SELECTION SORT
+
+
+
+    /* TEST INSERTION SORT */
+    @Test
+    public void testInsertionSort() {
+        testInsertionSortByClass(Integer.class);
+        testInsertionSortByClass(Double.class);
+        testInsertionSortByClass(Character.class);
+        testInsertionSortByClass(String.class);
+    }
+
+    private <T extends Comparable<T>> void testInsertionSortByClass(Class<T> type) {
+        // make lists of certain size
+        List<T> list = generateList(sampleSize, type);
+
+        List<T> sortedList = new ArrayList<>(list);
+        Collections.sort(sortedList);
+
+        List<T> reverseList = new ArrayList<>(sortedList);
+        Collections.reverse(reverseList);
+
+        // test lists
+        testInsertionSortAList(list, sortedList);
+        testInsertionSortAList(sortedList, sortedList);
+        testInsertionSortAList(reverseList, sortedList);
+    }
+
+    <T extends Comparable<T>> void testInsertionSortAList(List<T> input, List<T> expected) {
+        Sorter.insertion(input);
+        Assertions.assertEquals(expected, input);
+    } // END TEST INSERTION SORT
     
     
 
