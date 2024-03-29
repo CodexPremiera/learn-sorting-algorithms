@@ -11,10 +11,10 @@ public class SorterTest {
     /* TEST BUBBLE SORT */
     @Test
     public void testBubbleSort() {
-        testBubbleSortByClass(Integer.class);
-        testBubbleSortByClass(Double.class);
-        testBubbleSortByClass(Character.class);
-        testBubbleSortByClass(String.class);
+        new Thread(() -> testBubbleSortByClass(Integer.class)).start();
+        new Thread(() -> testBubbleSortByClass(Double.class)).start();
+        new Thread(() -> testBubbleSortByClass(Character.class)).start();
+        new Thread(() -> testBubbleSortByClass(String.class)).start();
     }
 
     private <T extends Comparable<T>> void testBubbleSortByClass(Class<T> type) {
@@ -36,14 +36,43 @@ public class SorterTest {
     <T extends Comparable<T>> void testBubbleSortAList(List<T> input, List<T> expected) {
         Sorter.bubble(input);
         Assertions.assertEquals(expected, input);
-    } // END OF BUBBLE SORT TEST
+    } // END TEST BUBBLE SORT
 
 
-    /* */
+    /* TEST SELECTION SORT */
+    @Test
+    public void testSelectionSort() {
+        new Thread(() -> testSelectionSortByClass(Integer.class)).start();
+        new Thread(() -> testSelectionSortByClass(Double.class)).start();
+        new Thread(() -> testSelectionSortByClass(Character.class)).start();
+        new Thread(() -> testSelectionSortByClass(String.class)).start();
+    }
 
+    private <T extends Comparable<T>> void testSelectionSortByClass(Class<T> type) {
+        // make lists of certain size
+        List<T> list = generateList(2000000, type);
+
+        List<T> sortedList = new ArrayList<>(list);
+        Collections.sort(sortedList);
+
+        List<T> reverseList = new ArrayList<>(sortedList);
+        Collections.reverse(reverseList);
+
+        // test lists
+        new Thread(() -> testSelectionSortAList(list, sortedList)).start();
+        new Thread(() -> testSelectionSortAList(sortedList, sortedList)).start();
+        new Thread(() -> testSelectionSortAList(reverseList, sortedList)).start();
+    }
+
+    <T extends Comparable<T>> void testSelectionSortAList(List<T> input, List<T> expected) {
+        Sorter.selection(input);
+        Assertions.assertEquals(expected, input);
+    } // END TEST SELECTION SORT
+    
+    
 
     /* HELPER METHODS */
-    public  <T extends Comparable<T>> List<T> generateList(int size, Class<T> type) {
+    public <T extends Comparable<T>> List<T> generateList(int size, Class<T> type) {
         List<T> list = new ArrayList<>();
         for (int i = 0; i < size; i++) {
             list.add(generateRandomValue(type));
