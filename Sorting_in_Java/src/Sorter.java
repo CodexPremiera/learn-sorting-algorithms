@@ -1,6 +1,6 @@
 import java.util.List;
 
-public class Sorter<T extends Comparable<T>> {
+public class Sorter {
 
     /* SORTING ALGORITHMS */
 
@@ -16,7 +16,7 @@ public class Sorter<T extends Comparable<T>> {
      * <li> Average-case Time Complexity: `O(n²)`
      * <li> Best-case Time Complexity: `O(n²)`
      * */
-    public void bubble(List<T> list) {
+    public static <T extends Comparable<T>> void bubble(List<T> list) {
         int last = list.size() - 1;
 
         for (int i = 0; i < last; i++) {
@@ -44,4 +44,5 @@ public class Sorter<T extends Comparable<T>> {
                 break;
         }
     } // END OF BUBBLE SORT
+
 }
