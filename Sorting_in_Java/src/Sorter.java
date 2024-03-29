@@ -102,7 +102,7 @@ public class Sorter {
         for (int i = 1; i < size; i++) {
             int j = i;
 
-            while (j > 0 &&
+            while (j >= 1 &&
                     list.get(j).compareTo(list.get(j - 1)) < 0) {
                 T temp = list.get(j);
                 list.set(j, list.get(j - 1));
@@ -111,4 +111,42 @@ public class Sorter {
             }
         }
     } // END OF INSERTION SORT
+
+
+    /**
+     * SHELL SORT
+     *
+     * <p> The shell sort algorithm is considered as an optimization
+     * of insertion. Whereas insertion sort compares and swaps on every
+     * adjacent element, shell sort does so at certain gaps first before
+     * on each adjacent. By doing so, the list would be much closer to
+     * sorted when performing the insertion sort in the end.
+     *
+     * <p> Shell sort also follows different increments in their gaps.
+     * However, the most common is the original increment. Gaps in this
+     * increment is a set of 'halves of the length (n)'. The gap starts
+     * with the n/2, followed by n/4, n/8, and so on until 1.
+     *
+     * <li> Worst-case Time Complexity: `O(n²)`
+     * <li> Average-case Time Complexity: `O(n log₂n)`
+     * <li> Best-case Time Complexity: `O(n log₂n)`
+     * */
+    public static <T extends Comparable<T>> void shell(List<T> list) {
+        int size = list.size();
+
+        for (int gap = size / 2; gap > 0; gap /= 2) {
+            for (int i = gap; i < size; i++) {
+                int j = i;
+
+                while (j >= gap &&
+                        list.get(j).compareTo(list.get(j - gap)) < 0) {
+                    T temp = list.get(j);
+                    list.set(j, list.get(j - gap));
+                    list.set(j - gap, temp);
+                    j -= gap;
+                }
+            }
+        }
+    } // END OF SHELL SORT
+
 }
