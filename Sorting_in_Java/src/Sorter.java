@@ -13,7 +13,7 @@ public class Sorter {
      *
      * <li> Worst-case Time Complexity: `O(n²)`
      * <li> Average-case Time Complexity: `O(n²)`
-     * <li> Best-case Time Complexity: `O(n²)`
+     * <li> Best-case Time Complexity: `O(n)`
      * */
     public static <T extends Comparable<T>> void bubble(List<T> list) {
         int last = list.size() - 1;
@@ -64,7 +64,6 @@ public class Sorter {
         for (int i = 0; i < last; i++) {
             int minIndex = i;
 
-
             // iterate only through the unsorted section
             for (int j = i; j < size; j++) {
                 T current = list.get(j);
@@ -83,4 +82,33 @@ public class Sorter {
             }
         }
     } // END OF SELECTION SORT
+
+
+    /**
+     * INSERTION SORT
+     *
+     * <p> The insertion sort algorithm divides the list into two sections:
+     * the sorted section and the unsorted section. The algorithm iterates
+     * through the list, 'inserts' the current element into the correct position
+     * in the sorted section.
+     *
+     * <li> Worst-case Time Complexity: `O(n²)`
+     * <li> Average-case Time Complexity: `O(n²)`
+     * <li> Best-case Time Complexity: `O(n)`
+     * */
+    public static <T extends Comparable<T>> void insertion(List<T> list) {
+        int size = list.size();
+
+        for (int i = 1; i < size; i++) {
+            int j = i;
+
+            while (j > 0 &&
+                    list.get(j).compareTo(list.get(j - 1)) < 0) {
+                T temp = list.get(j);
+                list.set(j, list.get(j - 1));
+                list.set(j - 1, temp);
+                j--;
+            }
+        }
+    } // END OF INSERTION SORT
 }
