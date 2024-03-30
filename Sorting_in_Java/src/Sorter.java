@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class Sorter {
@@ -15,7 +16,7 @@ public class Sorter {
      * <li> Average-case Time Complexity: `O(n²)`
      * <li> Best-case Time Complexity: `O(n)`
      * */
-    public static <T extends Comparable<T>> void bubble(List<T> list) {
+    public static <T extends Comparable<T>> void bubbleSort(List<T> list) {
         int last = list.size() - 1;
 
         for (int i = 0; i < last; i++) {
@@ -57,7 +58,7 @@ public class Sorter {
      * <li> Average-case Time Complexity: `O(n²)`
      * <li> Best-case Time Complexity: `O(n²)`
      * */
-    public static <T extends Comparable<T>> void selection(List<T> list) {
+    public static <T extends Comparable<T>> void selectionSort(List<T> list) {
         int size = list.size();
         int last = size - 1;
 
@@ -96,7 +97,7 @@ public class Sorter {
      * <li> Average-case Time Complexity: `O(n²)`
      * <li> Best-case Time Complexity: `O(n)`
      * */
-    public static <T extends Comparable<T>> void insertion(List<T> list) {
+    public static <T extends Comparable<T>> void insertionSort(List<T> list) {
         int size = list.size();
 
         for (int i = 1; i < size; i++) {
@@ -131,7 +132,7 @@ public class Sorter {
      * <li> Average-case Time Complexity: `O(n log₂n)`
      * <li> Best-case Time Complexity: `O(n log₂n)`
      * */
-    public static <T extends Comparable<T>> void shell(List<T> list) {
+    public static <T extends Comparable<T>> void shellSort(List<T> list) {
         int size = list.size();
 
         for (int gap = size / 2; gap > 0; gap /= 2) {
@@ -149,4 +150,84 @@ public class Sorter {
         }
     } // END OF SHELL SORT
 
+
+
+    /**
+     * MERGE SORT
+     *
+     * <p> The merge sort algorithm is a divide-and-conquer algorithm
+     * that divides the list into two halves, then sorts each half, and
+     * merges them back together.
+     *
+     * <li> Worst-case Time Complexity: `O(n log₂n)`
+     * <li> Average-case Time Complexity: `O(n log₂n)`
+     * <li> Best-case Time Complexity: `O(n log₂n)`
+     * */
+
+    public static <T extends Comparable<T>> void mergeSort(List<T> list) {
+        int listSize = list.size();
+        int middle = listSize / 2;
+
+        if (list.size() <= 1)
+            return;
+
+        List<T> left = new ArrayList<>(list.subList(0, middle));
+        List<T> right = new ArrayList<>(list.subList(middle, listSize));
+
+        mergeSort(left);
+        mergeSort(right);
+
+        merge(list, left, right);
+    }
+
+    private static <T extends Comparable<T>> void merge (List<T> merged, List<T> left, List<T> right) {
+        // clear the merged list
+        merged.clear();
+
+        // define the sizes and counters
+        int leftSize = left.size();
+        int rightSize = right.size();
+        int leftCount = 0;
+        int rightCount = 0;
+
+        // merge the list; add the smallest element between the lists first
+        while (leftCount < leftSize && rightCount < rightSize) {
+            T leftCurrent = left.get(leftCount);
+            T rightCurrent = right.get(rightCount);
+
+            boolean leftCurrentIsLesser = leftCurrent.compareTo(rightCurrent) <= 0;
+
+            if (leftCurrentIsLesser) {
+                merged.add(leftCurrent);
+                leftCount++;
+            } else {
+                merged.add(rightCurrent);
+                rightCount++;
+            }
+        }
+
+        // merge the list; add the remainder of the left or right
+        while (leftCount < leftSize)
+            merged.add(left.get(leftCount++));
+
+        while (rightCount < rightSize)
+            merged.add(right.get(rightCount++));
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
