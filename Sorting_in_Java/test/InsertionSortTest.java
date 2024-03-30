@@ -7,7 +7,7 @@ import java.util.List;
 public class InsertionSortTest extends SorterTest {
 
     @Override
-    <T extends Comparable<T>> void runSort(List<T> input, List<T> expected) {
+    public <T extends Comparable<T>> void runSort(List<T> input, List<T> expected) {
         Sorter.insertionSort(input);
         Assertions.assertEquals(expected, input);
     }

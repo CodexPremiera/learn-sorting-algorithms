@@ -4,11 +4,11 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 
-public class SelectionSortTest extends SorterTest {
+public class MergeSortTest extends SorterTest {
 
     @Override
-    public <T extends Comparable<T>> void runSort(List<T> input, List<T> expected) {
-        Sorter.selectionSort(input);
+    public  <T extends Comparable<T>> void runSort(List<T> input, List<T> expected) {
+        Sorter.mergeSort(input);
         Assertions.assertEquals(expected, input);
     }
 

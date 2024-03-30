@@ -86,7 +86,7 @@ public abstract class SorterTest {
     }
     
 
-    /* TEST BUBBLE SORT */
+    /* TESTER METHODS */
     @SuppressWarnings("unchecked")
     public void runSortOnRandom() {
         runSort((List<Integer>) randomLists.get("INT"), (List<Integer>) sortedLists.get("INT"));
@@ -111,8 +111,9 @@ public abstract class SorterTest {
         runSort((List<String>) reversedLists.get("STRING"), (List<String>) sortedLists.get("STRING"));
     }
 
+    
     /* ABSTRACT METHODS */
-    abstract <T extends Comparable<T>> void runSort(List<T> input, List<T> expected);
+    public abstract <T extends Comparable<T>> void runSort(List<T> input, List<T> expected);
 
     @Test
     abstract public void testOnSorted();

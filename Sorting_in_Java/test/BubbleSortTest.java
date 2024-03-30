@@ -6,7 +6,7 @@ import java.util.List;
 public class BubbleSortTest extends SorterTest {
 
     @Override
-    <T extends Comparable<T>> void runSort(List<T> input, List<T> expected) {
+    public <T extends Comparable<T>> void runSort(List<T> input, List<T> expected) {
         Sorter.bubbleSort(input);
         Assertions.assertEquals(expected, input);
     }
