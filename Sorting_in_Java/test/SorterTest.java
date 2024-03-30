@@ -1,16 +1,48 @@
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 
-public class SorterTest {
-    private final int sampleSize = 8000;
+public abstract class SorterTest {
+    /* FIELDS */
+    private final int sampleSize = 20000;
+    private final List<Integer> intList = generateList(sampleSize, Integer.class);
+    private final List<Double> doubleList = generateList(sampleSize, Double.class);
+    private final List<Character> charList = generateList(sampleSize, Character.class);
+    private final List<String> stringList = generateList(sampleSize, String.class);
+
+
+    /* RANDOM LISTS */
+    public final Map<String, List<?>> randomLists = Map.of(
+            "INT", intList,
+            "DOUBLE", doubleList,
+            "CHAR", charList,
+            "STRING", stringList
+    );
+
+    /* SORTED LISTS */
+    public final Map<String, List<?>> sortedLists = Map.of(
+            "INT", sortList(intList),
+            "DOUBLE", sortList(doubleList),
+            "CHAR", sortList(charList),
+            "STRING", sortList(stringList)
+    );
+
+
+    /* REVERSED LISTS */
+    public final Map<String, List<?>> reversedLists = Map.of(
+            "INT", reverseList(intList),
+            "DOUBLE", reverseList(doubleList),
+            "CHAR", reverseList(charList),
+            "STRING", reverseList(stringList)
+    );
+
 
     /* HELPER METHODS */
-    public <T extends Comparable<T>> List<T> generateList(int size, Class<T> type) {
+    private  <T extends Comparable<T>> List<T> generateList(int size, Class<T> type) {
         List<T> list = new ArrayList<>();
         for (int i = 0; i < size; i++) {
             list.add(generateRandomValue(type));
@@ -41,130 +73,53 @@ public class SorterTest {
             throw new IllegalArgumentException("Unsupported type: " + type.getSimpleName());
     }
 
+    private <T extends Comparable<T>> List<T> sortList(List<T> list) {
+        List<T> newList = new ArrayList<>(list);
+        Collections.sort(newList);
+        return newList;
+    }
+
+    private <T extends Comparable<T>> List<T> reverseList(List<T> list) {
+        List<T> newList = new ArrayList<>(list);
+        Collections.reverse(newList);
+        return newList;
+    }
+    
 
     /* TEST BUBBLE SORT */
+    @SuppressWarnings("unchecked")
+    public void runSortOnRandom() {
+        runSort((List<Integer>) randomLists.get("INT"), (List<Integer>) sortedLists.get("INT"));
+        runSort((List<Double>) randomLists.get("DOUBLE"), (List<Double>) sortedLists.get("DOUBLE"));
+        runSort((List<Character>) randomLists.get("CHAR"), (List<Character>) sortedLists.get("CHAR"));
+        runSort((List<String>) randomLists.get("STRING"), (List<String>) sortedLists.get("STRING"));
+    }
+
+    @SuppressWarnings("unchecked")
+    public void runSortOnSorted() {
+        runSort((List<Integer>) sortedLists.get("INT"), (List<Integer>) sortedLists.get("INT"));
+        runSort((List<Double>) sortedLists.get("DOUBLE"), (List<Double>) sortedLists.get("DOUBLE"));
+        runSort((List<Character>) sortedLists.get("CHAR"), (List<Character>) sortedLists.get("CHAR"));
+        runSort((List<String>) sortedLists.get("STRING"), (List<String>) sortedLists.get("STRING"));
+    }
+
+    @SuppressWarnings("unchecked")
+    public void runSortOnReversed() {
+        runSort((List<Integer>) reversedLists.get("INT"), (List<Integer>) sortedLists.get("INT"));
+        runSort((List<Double>) reversedLists.get("DOUBLE"), (List<Double>) sortedLists.get("DOUBLE"));
+        runSort((List<Character>) reversedLists.get("CHAR"), (List<Character>) sortedLists.get("CHAR"));
+        runSort((List<String>) reversedLists.get("STRING"), (List<String>) sortedLists.get("STRING"));
+    }
+
+    /* ABSTRACT METHODS */
+    abstract <T extends Comparable<T>> void runSort(List<T> input, List<T> expected);
+
     @Test
-    public void testBubbleSort() {
-        testBubbleSortByClass(Integer.class);
-        testBubbleSortByClass(Double.class);
-        testBubbleSortByClass(Character.class);
-        testBubbleSortByClass(String.class);
-    }
+    abstract public void testOnSorted();
 
-    private <T extends Comparable<T>> void testBubbleSortByClass(Class<T> type) {
-        // make lists of certain size
-        List<T> list = generateList(sampleSize, type);
-
-        List<T> sortedList = new ArrayList<>(list);
-        Collections.sort(sortedList);
-
-        List<T> reverseList = new ArrayList<>(sortedList);
-        Collections.reverse(reverseList);
-
-        // test lists
-        testBubbleSortAList(list, sortedList);
-        testBubbleSortAList(sortedList, sortedList);
-        testBubbleSortAList(reverseList, sortedList);
-    }
-
-    <T extends Comparable<T>> void testBubbleSortAList(List<T> input, List<T> expected) {
-        Sorter.bubble(input);
-        Assertions.assertEquals(expected, input);
-    } // END TEST BUBBLE SORT
-
-
-
-    /* TEST SELECTION SORT */
     @Test
-    public void testSelectionSort() {
-        testSelectionSortByClass(Integer.class);
-        testSelectionSortByClass(Double.class);
-        testSelectionSortByClass(Character.class);
-        testSelectionSortByClass(String.class);
-    }
+    abstract public void testOnRandom();
 
-    private <T extends Comparable<T>> void testSelectionSortByClass(Class<T> type) {
-        // make lists of certain size
-        List<T> list = generateList(sampleSize, type);
-
-        List<T> sortedList = new ArrayList<>(list);
-        Collections.sort(sortedList);
-
-        List<T> reverseList = new ArrayList<>(sortedList);
-        Collections.reverse(reverseList);
-
-        // test lists
-        testSelectionSortAList(list, sortedList);
-        testSelectionSortAList(sortedList, sortedList);
-        testSelectionSortAList(reverseList, sortedList);
-    }
-
-    <T extends Comparable<T>> void testSelectionSortAList(List<T> input, List<T> expected) {
-        Sorter.selection(input);
-        Assertions.assertEquals(expected, input);
-    } // END TEST SELECTION SORT
-
-
-
-    /* TEST INSERTION SORT */
     @Test
-    public void testInsertionSort() {
-        testInsertionSortByClass(Integer.class);
-        testInsertionSortByClass(Double.class);
-        testInsertionSortByClass(Character.class);
-        testInsertionSortByClass(String.class);
-    }
-
-    private <T extends Comparable<T>> void testInsertionSortByClass(Class<T> type) {
-        // make lists of certain size
-        List<T> list = generateList(sampleSize, type);
-
-        List<T> sortedList = new ArrayList<>(list);
-        Collections.sort(sortedList);
-
-        List<T> reverseList = new ArrayList<>(sortedList);
-        Collections.reverse(reverseList);
-
-        // test lists
-        testInsertionSortAList(list, sortedList);
-        testInsertionSortAList(sortedList, sortedList);
-        testInsertionSortAList(reverseList, sortedList);
-    }
-
-    <T extends Comparable<T>> void testInsertionSortAList(List<T> input, List<T> expected) {
-        Sorter.insertion(input);
-        Assertions.assertEquals(expected, input);
-    } // END TEST INSERTION SORT
-
-
-    
-    /* TEST SHELL SORT */
-    @Test
-    public void testShellSort() {
-        testShellSortByClass(Integer.class);
-        testShellSortByClass(Double.class);
-        testShellSortByClass(Character.class);
-        testShellSortByClass(String.class);
-    }
-
-    private <T extends Comparable<T>> void testShellSortByClass(Class<T> type) {
-        // make lists of certain size
-        List<T> list = generateList(sampleSize, type);
-
-        List<T> sortedList = new ArrayList<>(list);
-        Collections.sort(sortedList);
-
-        List<T> reverseList = new ArrayList<>(sortedList);
-        Collections.reverse(reverseList);
-
-        // test lists
-        testShellSortAList(list, sortedList);
-        testShellSortAList(sortedList, sortedList);
-        testShellSortAList(reverseList, sortedList);
-    }
-
-    <T extends Comparable<T>> void testShellSortAList(List<T> input, List<T> expected) {
-        Sorter.shell(input);
-        Assertions.assertEquals(expected, input);
-    } // END TEST SHELL SORT
+    abstract public void testOnReversed();
 }
