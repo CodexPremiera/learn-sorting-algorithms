@@ -218,9 +218,65 @@ public class Sorter {
         while (rightCount < rightSize)
             merged.add(right.get(rightCount++));
     }
+
+    /**
+     * QUICK SORT
+     *
+     * <p> The quick sort algorithm is a divide-and-conquer algorithm that uses
+     * a pivot to divide a list between the elements greater than the pivot and
+     * the elements lesser than the pivot.
+     *
+     * <p> In this implementation, the mergeSort() method recursively divides
+     * the list into a left and a right sublist and performs mergeSort on each
+     * of them. Once sorted, the left and right are merge together using the
+     * merge() helper method.
+     *
+     * <ul>
+     * <li> Worst-case Time Complexity: `O(n log₂n)`
+     * <li> Average-case Time Complexity: `O(n log₂n)`
+     * <li> Best-case Time Complexity: `O(n log₂n)`
+     * */
+    public static <T extends Comparable<T>> void quickSort(List<T> list) {
+        quickSort(list,0, list.size() - 1);
+    }
+
+    private static <T extends Comparable<T>> void quickSort(List<T> list, int low, int high) {
+        if (low < high) {
+            int pivotIndex = partition(list, low, high);
+            quickSort(list, low, pivotIndex - 1);
+            quickSort(list, pivotIndex + 1, high);
+        }
+    }
+
+    // partition using median-of-three pivot selection
+    private static <T extends Comparable<T>> int partition(List<T> list, int low, int high) {
+        int pivotIndex = low + (high - low) / 2;
+
+        // place the pivot at the end
+        T pivot = list.get(pivotIndex);
+        swap(list, pivotIndex, high);
+
+        // partition the list
+        int swapMarker = low;
+        for (int current = low; current < high; current++) {
+            if (list.get(current).compareTo(pivot) > 0)
+                continue;
+
+            if (swapMarker != current)
+                swap(list, swapMarker, current);
+            swapMarker++;
+        }
+
+        swap(list, swapMarker, high);
+        return swapMarker;
+    }
+
+    private static <T extends Comparable<T>> void swap(List<T> list, int i, int j) {
+        T temp = list.get(i);
+        list.set(i, list.get(j));
+        list.set(j, temp);
+    }
 }
-
-
 
 
 
