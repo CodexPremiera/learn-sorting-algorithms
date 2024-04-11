@@ -149,4 +149,66 @@ public:
             }
         }
     } // END OF SHELL SORT
+
+
+    /**
+     * MERGE SORT
+     *
+     * <p> The mergeList sort algorithm is a divide-and-conquer algorithm that
+     * divides the list into two halves, then sorts each half, and merges them
+     * back together.
+     *
+     * <p> In this implementation, the merge() method recursively divides
+     * the list into a left and a right sublist and performs merge on each
+     * of them. Once sorted, the left and right are mergeList together using the
+     * mergeList() helper method.
+     *
+     * <ul>
+     * <li> Worst-case Time Complexity: `O(n log₂n)`
+     * <li> Average-case Time Complexity: `O(n log₂n)`
+     * <li> Best-case Time Complexity: `O(n log₂n)`
+     * */
+    template<typename T>
+    static void mergeList(std::vector<T>& merged, const std::vector<T>& left, const std::vector<T>& right) {
+        merged.clear();
+
+        int leftSize = left.size();
+        int rightSize = right.size();
+        int leftCount = 0;
+        int rightCount = 0;
+
+        while (leftCount < leftSize && rightCount < rightSize) {
+            const T& leftCurrent = left[leftCount];
+            const T& rightCurrent = right[rightCount];
+
+            if (leftCurrent <= rightCurrent) {
+                merged.push_back(leftCurrent);
+                leftCount++;
+            } else {
+                merged.push_back(rightCurrent);
+                rightCount++;
+            }
+        }
+
+        while (leftCount < leftSize)
+            merged.push_back(left[leftCount++]);
+
+        while (rightCount < rightSize)
+            merged.push_back(right[rightCount++]);
+    }
+
+    template<typename T>
+    static void merge(std::vector<T>& list) {
+        int listSize = list.size();
+        if (listSize <= 1) return;
+
+        int middle = listSize / 2;
+        std::vector<T> left(list.begin(), list.begin() + middle);
+        std::vector<T> right(list.begin() + middle, list.end());
+
+        merge(left);
+        merge(right);
+
+        mergeList(list, left, right);
+    } // END OF MERGE SORT
 };
