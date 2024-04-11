@@ -16,13 +16,12 @@ public:
      * BUBBLE SORT
      *
      * <p> The bubble sort algorithm is infamous for being so slow.
-     * The algorithm iterates through the list. On each iteration,
-     * it iterates again to find the largest element of the list
-     * and 'bubble-it-up' to the end.
+     * The algorithm iterates through the list, finds the largest
+     * element in each iteration and 'bubbles-it-up' to the end.
      *
      * <li> Worst-case Time Complexity: `O(n²)`
      * <li> Average-case Time Complexity: `O(n²)`
-     * <li> Best-case Time Complexity: `O(n²)`
+     * <li> Best-case Time Complexity: `O(n)`
      * */
     template<typename T>
     void static bubble(vector<T>& list) {
@@ -51,4 +50,37 @@ public:
                 break;
         }
     } // END OF BUBBLE SORT
+
+
+    /**
+     * SELECTION SORT
+     *
+     * <p> The selection sort algorithm divides the list into two sections:
+     * the sorted section and the unsorted section. The algorithm iterates
+     * through the list, 'selects' the index of the smallest in each iteration
+     * and places it to the current position.
+     *
+     * <li> Worst-case Time Complexity: `O(n²)`
+     * <li> Average-case Time Complexity: `O(n²)`
+     * <li> Best-case Time Complexity: `O(n²)`
+     * */
+    template <typename T>
+    void static selection(std::vector<T>& list) {
+        int size = list.size();
+        int last = size - 1;
+
+        for (int i = 0; i < last; i++) {
+            int minIndex = i;
+
+            for (int j = i; j < size; j++) {
+                if (!(list[j] < list[minIndex]))
+                    continue;
+
+                minIndex = j;
+            }
+
+            if (minIndex != i)
+                std::swap(list[i], list[minIndex]);
+        }
+    }
 };
