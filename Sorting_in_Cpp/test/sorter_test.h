@@ -99,4 +99,42 @@ public:
     } // END OF BUBBLE SORT TEST
 
 
+    // SELECTION SORT TEST
+    void testSelectionSort() {
+        const int vectorSize = 2000;
+
+        // Test for integers
+        vector<int> unsortedIntegers = generateRandomVector<int>(vectorSize);
+        Sorter::selection(unsortedIntegers);
+        if (!isSorted(unsortedIntegers)) {
+            cerr << "Selection sort failed for integers" << endl;
+            return;
+        }
+
+        // Test for doubles
+        vector<double> unsortedDoubles = generateRandomVector<double>(vectorSize);
+        Sorter::selection(unsortedDoubles);
+        if (!isSorted(unsortedDoubles)) {
+            cerr << "Selection sort failed for doubles" << endl;
+            return;
+        }
+
+        // Test for chars
+        vector<char> unsortedChars = generateRandomVector<char>(vectorSize);
+        Sorter::selection(unsortedChars);
+        if (!isSorted(unsortedChars)) {
+            cerr << "Selection sort failed for chars" << endl;
+            return;
+        }
+
+        // Test for strings
+        vector<string> unsortedStrings = generateRandomStrVector(vectorSize);
+        Sorter::selection(unsortedStrings);
+        if (!isSorted(unsortedStrings)) {
+            cerr << "Selection sort failed for strings" << endl;
+            return;
+        }
+
+        cout << "Selection sort passed" << endl;
+    } // END OF SELECTION SORT TEST
 };
