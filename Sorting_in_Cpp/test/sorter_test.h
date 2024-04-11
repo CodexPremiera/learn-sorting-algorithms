@@ -137,4 +137,44 @@ public:
 
         cout << "Selection sort passed" << endl;
     } // END OF SELECTION SORT TEST
+    
+
+    // INSERTION SORT TEST
+    void testInsertionSort() {
+        const int vectorSize = 2000;
+
+        // Test for integers
+        vector<int> unsortedIntegers = generateRandomVector<int>(vectorSize);
+        Sorter::insertion(unsortedIntegers);
+        if (!isSorted(unsortedIntegers)) {
+            cerr << "Insertion sort failed for integers" << endl;
+            return;
+        }
+
+        // Test for doubles
+        vector<double> unsortedDoubles = generateRandomVector<double>(vectorSize);
+        Sorter::insertion(unsortedDoubles);
+        if (!isSorted(unsortedDoubles)) {
+            cerr << "Insertion sort failed for doubles" << endl;
+            return;
+        }
+
+        // Test for chars
+        vector<char> unsortedChars = generateRandomVector<char>(vectorSize);
+        Sorter::insertion(unsortedChars);
+        if (!isSorted(unsortedChars)) {
+            cerr << "Insertion sort failed for chars" << endl;
+            return;
+        }
+
+        // Test for strings
+        vector<string> unsortedStrings = generateRandomStrVector(vectorSize);
+        Sorter::insertion(unsortedStrings);
+        if (!isSorted(unsortedStrings)) {
+            cerr << "Insertion sort failed for strings" << endl;
+            return;
+        }
+
+        cout << "Insertion sort passed" << endl;
+    } // END OF INSERTION SORT TEST
 };
