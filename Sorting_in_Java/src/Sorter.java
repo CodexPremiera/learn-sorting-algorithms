@@ -226,10 +226,10 @@ public class Sorter {
      * a pivot to divide a list between the elements greater than the pivot and
      * the elements lesser than the pivot.
      *
-     * <p> In this implementation, the mergeSort() method recursively divides
-     * the list into a left and a right sublist and performs mergeSort on each
-     * of them. Once sorted, the left and right are merge together using the
-     * merge() helper method.
+     * <p> In this implementation, the quickSort() method recursively calls the
+     * partition() method to find the pivot index. The partition() method divides
+     * the list into two sides—one greater and one lesser than the pivot. Then the
+     * quickSort() method is called on each side.
      *
      * <ul>
      * <li> Worst-case Time Complexity: `O(n log₂n)`
