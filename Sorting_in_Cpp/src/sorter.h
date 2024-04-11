@@ -83,4 +83,33 @@ public:
                 std::swap(list[i], list[minIndex]);
         }
     }
+
+
+    /**
+     * INSERTION SORT
+     *
+     * <p> The insertion sort algorithm divides the list into two sections:
+     * the sorted section and the unsorted section. The algorithm iterates
+     * through the list, 'inserts' the current element into the correct position
+     * in the sorted section.
+     *
+     * <li> Worst-case Time Complexity: `O(n²)`
+     * <li> Average-case Time Complexity: `O(n²)`
+     * <li> Best-case Time Complexity: `O(n)`
+     * */
+    template<typename T>
+    void static insertion(std::vector<T>& list) {
+        int size = list.size();
+
+        for (int i = 1; i < size; i++) {
+            int j = i;
+
+            while (j >= 1 && list[j] < list[j - 1]) {
+                T temp = list[j];
+                list[j] = list[j - 1];
+                list[j - 1] = temp;
+                j--;
+            }
+        }
+    }
 };
