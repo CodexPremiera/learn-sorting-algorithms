@@ -257,4 +257,44 @@ public:
 
         cout << "Merge sort passed" << endl;
     } // END OF MERGE SORT TEST
+
+
+    // QUICK SORT TEST
+    void testQuickSort() {
+        const int vectorSize = 2000;
+
+        // Test for integers
+        vector<int> unsortedIntegers = generateRandomVector<int>(vectorSize);
+        Sorter::quick(unsortedIntegers);
+        if (!isSorted(unsortedIntegers)) {
+            cerr << "Quick sort failed for integers" << endl;
+            return;
+        }
+
+        // Test for doubles
+        vector<double> unsortedDoubles = generateRandomVector<double>(vectorSize);
+        Sorter::quick(unsortedDoubles);
+        if (!isSorted(unsortedDoubles)) {
+            cerr << "Quick sort failed for doubles" << endl;
+            return;
+        }
+
+        // Test for chars
+        vector<char> unsortedChars = generateRandomVector<char>(vectorSize);
+        Sorter::quick(unsortedChars);
+        if (!isSorted(unsortedChars)) {
+            cerr << "Quick sort failed for chars" << endl;
+            return;
+        }
+
+        // Test for strings
+        vector<string> unsortedStrings = generateRandomStrVector(vectorSize);
+        Sorter::quick(unsortedStrings);
+        if (!isSorted(unsortedStrings)) {
+            cerr << "Quick sort failed for strings" << endl;
+            return;
+        }
+
+        cout << "Quick sort passed" << endl;
+    } // END OF QUICK SORT TEST
 };
