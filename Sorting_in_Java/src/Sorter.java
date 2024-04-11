@@ -155,22 +155,27 @@ public class Sorter {
     /**
      * MERGE SORT
      *
-     * <p> The merge sort algorithm is a divide-and-conquer algorithm
-     * that divides the list into two halves, then sorts each half, and
-     * merges them back together.
+     * <p> The merge sort algorithm is a divide-and-conquer algorithm that
+     * divides the list into two halves, then sorts each half, and merges them
+     * back together.
      *
+     * <p> In this implementation, the mergeSort() method recursively divides
+     * the list into a left and a right sublist and performs mergeSort on each
+     * of them. Once sorted, the left and right are merge together using the
+     * merge() helper method.
+     *
+     * <ul>
      * <li> Worst-case Time Complexity: `O(n log₂n)`
      * <li> Average-case Time Complexity: `O(n log₂n)`
      * <li> Best-case Time Complexity: `O(n log₂n)`
      * */
-
     public static <T extends Comparable<T>> void mergeSort(List<T> list) {
+        // base case
         int listSize = list.size();
+        if (listSize <= 1) return;
+
+        // recursive case
         int middle = listSize / 2;
-
-        if (list.size() <= 1)
-            return;
-
         List<T> left = new ArrayList<>(list.subList(0, middle));
         List<T> right = new ArrayList<>(list.subList(middle, listSize));
 

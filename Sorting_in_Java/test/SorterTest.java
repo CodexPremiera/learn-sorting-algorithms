@@ -8,7 +8,7 @@ import java.util.Map;
 
 public abstract class SorterTest {
     /* FIELDS */
-    private final int sampleSize = 20000;
+    private final int sampleSize = 800000;
     private final List<Integer> intList = generateList(sampleSize, Integer.class);
     private final List<Double> doubleList = generateList(sampleSize, Double.class);
     private final List<Character> charList = generateList(sampleSize, Character.class);
