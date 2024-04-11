@@ -211,4 +211,56 @@ public:
 
         mergeList(list, left, right);
     } // END OF MERGE SORT
+
+
+    /**
+     * QUICK SORT
+     *
+     * <p> The quick sort algorithm is a divide-and-conquer algorithm that uses
+     * a pivot to divide a list between the elements greater than the pivot and
+     * the elements lesser than the pivot.
+     *
+     * <p> In this implementation, the quick() method recursively calls the
+     * partition() method to find the pivot index. The partition() method divides
+     * the list into two sides—one greater and one lesser than the pivot. Then the
+     * quick() method is called on each side.
+     *
+     * <ul>
+     * <li> Worst-case Time Complexity: `O(n log₂n)`
+     * <li> Average-case Time Complexity: `O(n log₂n)`
+     * <li> Best-case Time Complexity: `O(n log₂n)`
+     * */
+    template<typename T>
+    int static partition(std::vector<T>& list, int low, int high) {
+        int pivotIndex = low + (high - low) / 2;
+        T pivot = list[pivotIndex];
+        std::swap(list[pivotIndex], list[high]);
+        int swapMarker = low;
+        for (int current = low; current < high; current++) {
+            if (list[current] > pivot)
+                continue;
+
+            if (swapMarker != current)
+                std::swap(list[swapMarker], list[current]);
+
+            swapMarker++;
+        }
+        std::swap(list[swapMarker], list[high]);
+        return swapMarker;
+    }
+
+    template<typename T>
+    static void quick(std::vector<T>& list, int low, int high) {
+        if (low < high) {
+            int pivotIndex = partition(list, low, high);
+            quick(list, low, pivotIndex - 1);
+            quick(list, pivotIndex + 1, high);
+        }
+    }
+
+    template<typename T>
+    static void quick(std::vector<T>& list) {
+        quick(list, 0, list.size() - 1);
+    }
+    // END OF QUICK SORT
 };
