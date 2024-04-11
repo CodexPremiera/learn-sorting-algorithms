@@ -7,6 +7,7 @@ int main() {
     tester->testSelectionSort();
     tester->testInsertionSort();
     tester->testShellSort();
+    tester->testMergeSort();
 
     return 0;
 }

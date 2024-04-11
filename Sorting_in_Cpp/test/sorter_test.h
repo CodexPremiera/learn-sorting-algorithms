@@ -217,4 +217,44 @@ public:
 
         cout << "Shell sort passed" << endl;
     } // END OF SHELL SORT TEST
+
+
+    // MERGE SORT TEST
+    void testMergeSort() {
+        const int vectorSize = 2000;
+
+        // Test for integers
+        vector<int> unsortedIntegers = generateRandomVector<int>(vectorSize);
+        Sorter::merge(unsortedIntegers);
+        if (!isSorted(unsortedIntegers)) {
+            cerr << "Merge sort failed for integers" << endl;
+            return;
+        }
+
+        // Test for doubles
+        vector<double> unsortedDoubles = generateRandomVector<double>(vectorSize);
+        Sorter::merge(unsortedDoubles);
+        if (!isSorted(unsortedDoubles)) {
+            cerr << "Merge sort failed for doubles" << endl;
+            return;
+        }
+
+        // Test for chars
+        vector<char> unsortedChars = generateRandomVector<char>(vectorSize);
+        Sorter::merge(unsortedChars);
+        if (!isSorted(unsortedChars)) {
+            cerr << "Merge sort failed for chars" << endl;
+            return;
+        }
+
+        // Test for strings
+        vector<string> unsortedStrings = generateRandomStrVector(vectorSize);
+        Sorter::merge(unsortedStrings);
+        if (!isSorted(unsortedStrings)) {
+            cerr << "Merge sort failed for strings" << endl;
+            return;
+        }
+
+        cout << "Merge sort passed" << endl;
+    } // END OF MERGE SORT TEST
 };
