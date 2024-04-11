@@ -177,4 +177,44 @@ public:
 
         cout << "Insertion sort passed" << endl;
     } // END OF INSERTION SORT TEST
+
+
+    // SHELL SORT TEST
+    void testShellSort() {
+        const int vectorSize = 2000;
+
+        // Test for integers
+        vector<int> unsortedIntegers = generateRandomVector<int>(vectorSize);
+        Sorter::shell(unsortedIntegers);
+        if (!isSorted(unsortedIntegers)) {
+            cerr << "Shell sort failed for integers" << endl;
+            return;
+        }
+
+        // Test for doubles
+        vector<double> unsortedDoubles = generateRandomVector<double>(vectorSize);
+        Sorter::shell(unsortedDoubles);
+        if (!isSorted(unsortedDoubles)) {
+            cerr << "Shell sort failed for doubles" << endl;
+            return;
+        }
+
+        // Test for chars
+        vector<char> unsortedChars = generateRandomVector<char>(vectorSize);
+        Sorter::shell(unsortedChars);
+        if (!isSorted(unsortedChars)) {
+            cerr << "Shell sort failed for chars" << endl;
+            return;
+        }
+
+        // Test for strings
+        vector<string> unsortedStrings = generateRandomStrVector(vectorSize);
+        Sorter::shell(unsortedStrings);
+        if (!isSorted(unsortedStrings)) {
+            cerr << "Shell sort failed for strings" << endl;
+            return;
+        }
+
+        cout << "Shell sort passed" << endl;
+    } // END OF SHELL SORT TEST
 };

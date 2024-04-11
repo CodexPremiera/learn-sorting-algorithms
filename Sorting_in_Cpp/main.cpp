@@ -6,6 +6,7 @@ int main() {
     tester->testBubbleSort();
     tester->testSelectionSort();
     tester->testInsertionSort();
+    tester->testShellSort();
 
     return 0;
 }
